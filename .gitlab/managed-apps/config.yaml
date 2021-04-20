@@ -1,0 +1,17 @@
+ingress:
+  installed: true
+
+certManager:
+  installed: true
+  letsEncryptClusterIssuer:
+    installed: true
+    email: "user-name@domain.com"
+
+elasticStack:
+  installed: false
+  
+prometheus:
+  installed: true
+
+sentry:
+  installed: false

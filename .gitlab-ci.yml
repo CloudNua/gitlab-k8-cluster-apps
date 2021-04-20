@@ -1,0 +1,29 @@
+include:
+  - template: Managed-Cluster-Applications.gitlab-ci.yml 
+
+apply:
+  only:
+    variables:
+      - $APP_ENVIRONMENT == "all"
+
+.managed-apps:
+  extends: apply
+  script:
+    - gitlab-managed-apps /usr/local/share/gitlab-managed-apps/helmfile.yaml
+    - kubectl -n $TILLER_NAMESPACE get service ingress-nginx-ingress-controller || true
+    - INGRESS_HOST_IP=$(kubectl -n $TILLER_NAMESPACE get service ingress-nginx-ingress-controller -o jsonpath='{.status.loadBalancer.ingress[0].ip}' || true)
+    - INGRESS_HOST_HOSTNAME=$(kubectl -n $TILLER_NAMESPACE get service ingress-nginx-ingress-controller -o jsonpath='{.status.loadBalancer.ingress[0].hostname}' || true)
+    - echo "INGRESS_HOST_IP=$INGRESS_HOST_IP" >> ingress.env
+    - echo "INGRESS_HOST_HOSTNAME=$INGRESS_HOST_HOSTNAME" >> ingress.env
+  artifacts:
+    paths:
+      - tiller.log
+      - ingress.env
+
+eks-install:
+  extends: .managed-apps
+  environment:
+    name: eks/production
+  only:
+    variables:
+      - $APP_ENVIRONMENT == "aws"

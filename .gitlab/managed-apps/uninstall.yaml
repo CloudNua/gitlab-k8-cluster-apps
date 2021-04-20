@@ -1,0 +1,14 @@
+ingress:
+  installed: false
+
+certManager:
+  installed: false
+
+elasticStack:
+  installed: false
+  
+prometheus:
+  installed: false
+
+sentry:
+  installed: false
