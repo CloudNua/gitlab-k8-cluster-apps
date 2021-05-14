@@ -16,6 +16,8 @@ apply:
     - echo "INGRESS_HOST_IP=$INGRESS_HOST_IP" >> ingress.env
     - echo "INGRESS_HOST_HOSTNAME=$INGRESS_HOST_HOSTNAME" >> ingress.env
   artifacts:
+    reports:
+      cluster_applications: gl-cluster-applications.json
     paths:
       - tiller.log
       - ingress.env

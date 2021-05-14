@@ -5,13 +5,16 @@ certManager:
   installed: true
   letsEncryptClusterIssuer:
     installed: true
-    email: "user-name@domain.com"
+    email: "user1@emk-solutions.net"
+
+gitlabRunner:
+  installed: true
+
+prometheus:
+  installed: true
 
 elasticStack:
   installed: false
-  
-prometheus:
-  installed: true
 
 sentry:
   installed: false

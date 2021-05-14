@@ -4,6 +4,9 @@ ingress:
 certManager:
   installed: false
 
+gitlabRunner:
+  installed: false
+
 elasticStack:
   installed: false
   
