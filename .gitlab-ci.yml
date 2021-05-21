@@ -29,3 +29,11 @@ eks-install:
   only:
     variables:
       - $APP_ENVIRONMENT == "aws"
+
+gke-install:
+  extends: .managed-apps
+  environment:
+    name: gke/production
+  only:
+    variables:
+      - $APP_ENVIRONMENT == "gcp"
